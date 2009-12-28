@@ -1,0 +1,41 @@
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Copyright (C) 2009  Sebastian Mach (*1983)
+// * mail: phresnel/at/gmail/dot/com
+// * http://phresnel.org
+// * http://picogen.org
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+//=======================================================================================
+// color math
+//=======================================================================================
+namespace color {
+        template <int r_, int g_, int b_> struct rgb {
+                static_assert (r_>=0 && r_<=255, "you bailed 0<=r<=255");
+                static_assert (g_>=0 && g_<=255, "you bailed 0<=g<=255");
+                static_assert (b_>=0 && b_<=255, "you bailed 0<=b<=255");
+                enum {
+                        r = r_,
+                        g = g_,
+                        b = b_
+                };
+        };
+
+        template <typename r_, typename g_, typename b_> struct rgbf {
+                typedef r_ r;
+                typedef g_ g;
+                typedef b_ b;
+        };
+}
