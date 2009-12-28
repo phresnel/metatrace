@@ -31,7 +31,7 @@ namespace raytrace {
                         > direction;
                 
                         typedef vector::vector<
-                                frac0<0,1>, frac0<0,1>, frac0<0,1>
+                                scalar::c0, scalar::c0, scalar::c0
                         > position;
                 public:
                         typedef ray::ray<
@@ -65,11 +65,11 @@ namespace raytrace {
                         
                         enum {
                                 c = to_int<
-                                        tinplate::mul<
+                                        scalar::mul<
                                                 frac0<255,1>,
-                                                tinplate::max<
+                                                scalar::max<
                                                         frac0<0,1>,
-                                                        tinplate::min<
+                                                        scalar::min<
                                                                 frac0<1,1>,
                                                                 mul<
                                                                         frac0<1,4>,
@@ -87,12 +87,12 @@ namespace raytrace {
                         typedef typename lights::template shade<intersection> lit_result;
 
                 public:
-                        typedef typename ift<
+                        typedef ift<
                                 intersection::does_intersect,
-                                rgbf_to_rgb<typename lit_result::lit_color>,
+                                ::color::rgbf_to_rgb<typename lit_result::lit_color>,
                                 //rgbf_to_rgb<typename intersection::color>,
                                 background_color
-                        >::type color;
+                        > color;
                 };
         };
         
@@ -103,16 +103,16 @@ namespace raytrace {
                 typename LightsT                
         > struct scene {
                 
-                template <size_t x, size_t width, size_t y, size_t height> struct kernel {
+                template <unsigned int x, unsigned int width, unsigned int y, unsigned int height> struct kernel {
                 public:                                                
                         // Map 0..width to -0.5..+0.5.
-                        typedef tinplate::sub< 
-                                frac0<x+config::virtual_x, config::virtual_width>, 
-                                frac0<1,2>
+                        typedef scalar::sub< 
+                                scalar::div<scalar::from_int<x+config::virtual_x>, scalar::from_int<config::virtual_width>>, 
+                                scalar::c0_5
                         > u;
-                        typedef tinplate::neg<tinplate::sub<
-                                frac0<y+config::virtual_y, config::virtual_height>,
-                                frac0<1,2>
+                        typedef scalar::neg<scalar::sub<
+                                scalar::div<scalar::from_int<y+config::virtual_y>, scalar::from_int<config::virtual_height>>,
+                                scalar::c0_5
                         >> v;
                 
                         // Generate primary ray.

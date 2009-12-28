@@ -104,17 +104,17 @@ namespace vector {
         : normalize_impl<vec>::type{};
 
 
-        /*template <typename vec> struct normal_to_rgb
-        : rgb<
-                to_int<scalar::mul<frac0<255,1>,scalar::add<scalar::mul<typename vec::x,frac0<1,2>>, frac0<1,2>>>>::value,
-                to_int<scalar::mul<frac0<255,1>,scalar::add<scalar::mul<typename vec::y,frac0<1,2>>, frac0<1,2>>>>::value,
-                to_int<scalar::mul<frac0<255,1>,scalar::add<scalar::mul<typename vec::z,frac0<1,2>>, frac0<1,2>>>>::value
+        template <typename vec> struct normal_to_rgb
+        : color::rgb<
+                scalar::to_int<scalar::mul<scalar::from_int<255>, scalar::add<scalar::mul<typename vec::x,scalar::c0_5>, scalar::c0_5>>>::value,
+                scalar::to_int<scalar::mul<scalar::from_int<255>, scalar::add<scalar::mul<typename vec::y,scalar::c0_5>, scalar::c0_5>>>::value,
+                scalar::to_int<scalar::mul<scalar::from_int<255>, scalar::add<scalar::mul<typename vec::z,scalar::c0_5>, scalar::c0_5>>>::value
         > {};
                 
         template <typename vec> struct normal_to_rgbf
-        : rgbf<
-                scalar::add<scalar::mul<typename vec::x,frac0<1,2>>, frac0<1,2>>,
-                scalar::add<scalar::mul<typename vec::y,frac0<1,2>>, frac0<1,2>>,
-                scalar::add<scalar::mul<typename vec::z,frac0<1,2>>, frac0<1,2>>
-        > {};*/
+        : color::rgbf<
+                scalar::add<scalar::mul<typename vec::x,scalar::c0_5>, scalar::c0_5>,
+                scalar::add<scalar::mul<typename vec::y,scalar::c0_5>, scalar::c0_5>,
+                scalar::add<scalar::mul<typename vec::z,scalar::c0_5>, scalar::c0_5>
+        > {};
 }

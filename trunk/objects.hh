@@ -34,13 +34,13 @@ namespace objects {
                 typedef typename intersection::ray_pos ray_pos;
                 typedef typename intersection::ray_dir ray_dir;
 
-                typedef typename tinplate::heron_sqrt<typename intersection::det_sq>::type det;
+                typedef typename scalar::sqrt<typename intersection::det_sq> det;
 
-                typedef tinplate::sub<typename intersection::b,det> i1;
-                typedef tinplate::add<typename intersection::b,det> i2;                
+                typedef scalar::sub<typename intersection::b,det> i1;
+                typedef scalar::add<typename intersection::b,det> i2;                
                 enum { 
-                        i1_negative = tinplate::ltz<i1>::value,
-                        i2_not_negative = tinplate::gtz<i2>::value,
+                        i1_negative = scalar::less<i1,scalar::c0>::value,
+                        i2_not_negative = scalar::greater<i2,scalar::c0>::value,
                 };
         public:
                 enum {
@@ -56,7 +56,7 @@ namespace objects {
                         ift< 
                                 (hit_side>0),
                                 i1,
-                                frac0<-1,1>
+                                scalar::cn1
                         >
                 > distance;
         };
@@ -65,7 +65,7 @@ namespace objects {
                         hit_side = 0,
                         does_intersect = 0
                 };
-                typedef frac0<-1,1> distance;
+                typedef scalar::cn1 distance;
         };
 
         
@@ -73,25 +73,25 @@ namespace objects {
         template <typename intersection> struct sphere_drittens<intersection,true> {
                 typedef typename intersection::ray ray;
                 typedef typename intersection::distance distance;
-                typedef typename tinplate::ray::template madd<ray, distance> point_of_intersection;
+                typedef typename ::ray::template madd<ray, distance> point_of_intersection;
                 typedef vector::sub<
                         point_of_intersection,
                         typename intersection::sphere_position
                 > direction_;
                 /*typedef vector::vector<
                         ift<
-                                tinplate::can_reduce_precision<typename direction_::x>::value,
-                                tinplate::precision_reduce<typename direction_::x>,
+                                scalar::can_reduce_precision<typename direction_::x>::value,
+                                scalar::precision_reduce<typename direction_::x>,
                                 typename direction_::y
                         >,
                         ift<
-                                tinplate::can_reduce_precision<typename direction_::y>::value,
-                                tinplate::precision_reduce<typename direction_::y>,
+                                scalar::can_reduce_precision<typename direction_::y>::value,
+                                scalar::precision_reduce<typename direction_::y>,
                                 typename direction_::y
                         >,
                         ift<
-                                tinplate::can_reduce_precision<typename direction_::y>::value,
-                                tinplate::precision_reduce<typename direction_::y>,
+                                scalar::can_reduce_precision<typename direction_::y>::value,
+                                scalar::precision_reduce<typename direction_::y>,
                                 typename direction_::y
                         >
                 > direction;*/
@@ -99,8 +99,8 @@ namespace objects {
                 typedef vector::normalize<direction_> normal;
         };
         template <typename intersection> struct sphere_drittens<intersection,false> {
-                typedef vector::vector<frac0<1,1>,frac0<1,1>,frac0<1,1>> normal;
-                typedef vector::vector<frac0<0,1>,frac0<0,1>,frac0<0,1>> point_of_intersection;
+                typedef vector::vector<scalar::c1,scalar::c1,scalar::c1> normal;
+                typedef vector::vector<scalar::c0,scalar::c0,scalar::c0> point_of_intersection;
         };
                         
                         
@@ -108,7 +108,7 @@ namespace objects {
         private:
                 typedef position_ position;
                 typedef radius_ radius;
-                typedef tinplate::mul<radius_, radius_> radius_sq;
+                typedef scalar::mul<radius_, radius_> radius_sq;
         public:
                 
                 template <typename ray_> struct intersect {
@@ -120,14 +120,14 @@ namespace objects {
 
                         typedef vector::sub<ray_pos,position> v;
 
-                        typedef tinplate::neg< vector::dot<v, ray_dir> > b;
-                        typedef tinplate::mul<b,b> bb;
+                        typedef scalar::neg< vector::dot<v, ray_dir> > b;
+                        typedef scalar::mul<b,b> bb;
                 
                         typedef vector::length_sq<v> sqrV;
                 
-                        typedef tinplate::add<tinplate::sub<bb,sqrV>, radius_sq> det_sq;
+                        typedef scalar::add<scalar::sub<bb,sqrV>, radius_sq> det_sq;
 
-                        enum { det_not_negative = tinplate::gtz<det_sq>::value };                       
+                        enum { det_not_negative = scalar::greater<det_sq,scalar::c0>::value };                       
                         
                         friend class sphere_zweitens<intersect, det_not_negative>;
                         typedef sphere_zweitens<intersect, det_not_negative> zwo;
@@ -168,7 +168,7 @@ namespace objects {
                                 alpha::does_intersect && beta::does_intersect,
                                 // if both intersect, take nearest
                                 ift<
-                                        tinplate::lt<
+                                        scalar::less<
                                                 typename alpha::distance,
                                                 typename beta::distance
                                         >::value,

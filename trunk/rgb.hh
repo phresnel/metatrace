@@ -38,4 +38,24 @@ namespace color {
                 typedef g_ g;
                 typedef b_ b;
         };
+        
+        
+        //=======================================================================================
+        // fractional rgb
+        //=======================================================================================        
+        template <typename rgbf_> struct rgbf_to_rgb_impl {
+                enum : long long {
+                        r_ = scalar::to_int<scalar::mul<scalar::from_int<255>,typename rgbf_::r>>::value,
+                        g_ = scalar::to_int<scalar::mul<scalar::from_int<255>,typename rgbf_::g>>::value,
+                        b_ = scalar::to_int<scalar::mul<scalar::from_int<255>,typename rgbf_::b>>::value,
+                        r = r_<0?0:r_>255?255:r_,
+                        g = g_<0?0:g_>255?255:g_,
+                        b = b_<0?0:b_>255?255:b_
+                };
+                typedef rgb<r,g,b> type;
+        };
+
+        template <typename rgbf_> struct rgbf_to_rgb
+        : rgbf_to_rgb_impl<rgbf_>::type {};
+
 }

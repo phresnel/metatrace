@@ -58,9 +58,15 @@ namespace scalar {
         template <typename lhs, typename rhs, typename ...REST> struct sub<lhs,rhs,REST...>
         : sub<sub<lhs,rhs>, REST...> {};       
                 
-        template <typename lhs, typename rhs> struct mul {
+        /*template <typename lhs, typename rhs> struct mul {
                 enum : bits_type { value = (lhs::value*rhs::value) >> shift };
-        };
+        };*/
+        template <typename ...> struct mul;
+        template <typename lhs, typename rhs> struct mul<lhs,rhs>
+        : fixp<((lhs::value*rhs::value) >> shift)> {};
+        template <typename lhs, typename rhs, typename ...REST> struct mul<lhs,rhs,REST...>
+        : mul<mul<lhs,rhs>, REST...> {}; 
+                
         template <typename lhs, typename rhs> struct div {
                 enum : bits_type { value = (lhs::value<<shift)/rhs::value };
         };
@@ -90,15 +96,27 @@ namespace scalar {
         
         template <typename rhs> struct reciprocal : div<fixp<(1<<shift)>, rhs> {};
 
+        template <typename rhs> struct to_int {
+                enum { value = rhs::value >> shift };
+        };
+        template <int rhs> struct from_int : fixp<rhs<<shift> {};
+                
+        //=======================================================================================
+        // min, max
+        //=======================================================================================
+        template <typename lhs, typename rhs> struct max : ift<greater<lhs,rhs>::value,lhs,rhs> {};
+        template <typename lhs, typename rhs> struct min : ift<greater<lhs,rhs>::value,lhs,rhs> {};
+
         //*********************************************************************
         // some constants
         //*********************************************************************
+        typedef fixp<-(1<<shift)>     cn1, cn1_0;
         typedef fixp<0>               c0;
         typedef fixp<1<<(shift-3)>    c0_125;
         typedef fixp<1<<(shift-2)>    c0_25; 
         typedef fixp<1<<(shift-1)>    c0_5;
         typedef add <c0_25, c0_5>     c0_75;
-        typedef fixp<1<<shift>        c1, c1_0;
+        typedef fixp<1<<shift>        c1, c1_0;        
         typedef inc<c1>               c2, c2_0;
         typedef inc<c2>               c3, c3_0;
         typedef inc<c3>               c4, c4_0;

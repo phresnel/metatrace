@@ -40,7 +40,7 @@ namespace lights {
                                 vector::template add <                
                                         vector::template scale<
                                                 direction,
-                                                frac0<1,10>
+                                                scalar::c0_125
                                         >,
                                         typename intersection::point_of_intersection
                                 >,
@@ -57,14 +57,14 @@ namespace lights {
                                         !config::trace_shadows ||
                                         (!lightRayIntersect::does_intersect
                                          || 
-                                            (tinplate::template gt<
+                                            (scalar::template greater<
                                                 typename lightRayIntersect::distance,
                                                 typename vector::template length<diff>
                                             >::value
                                             || // dist>0 (epsilon self intersect)
-                                            tinplate::template lt<
+                                            scalar::template less<
                                                 typename lightRayIntersect::distance,
-                                                frac0<1,10>
+                                                scalar::c0_125
                                             >::value
                                             )
                                         )                                        
@@ -73,11 +73,11 @@ namespace lights {
                 
                         typedef ift<
                                 unobstructed,
-                                max<
-                                        frac0<0,1>,
+                                scalar::max<
+                                        scalar::c0_125,
                                         vector::dot<direction, typename intersection::normal>
                                 >,
-                                frac0<0,1>
+                                scalar::c0_125
                         > intensity;
                         /*typedef ift<
                                 unobstructed,
@@ -85,10 +85,10 @@ namespace lights {
                                 frac0<0,1>
                         > intensity;*/
                 public:
-                        typedef tinplate::rgbf<
-                                mul<typename color::r, typename intersection::color::r, intensity>,
-                                mul<typename color::g, typename intersection::color::g, intensity>,
-                                mul<typename color::b, typename intersection::color::b, intensity>
+                        typedef ::color::rgbf<
+                                scalar::mul<typename color::r, typename intersection::color::r, intensity>,
+                                scalar::mul<typename color::g, typename intersection::color::g, intensity>,
+                                scalar::mul<typename color::b, typename intersection::color::b, intensity>
                         > lit_color;
                 
                         /*typedef tinplate::rgbf<
