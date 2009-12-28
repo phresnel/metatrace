@@ -2,8 +2,8 @@
 
 mkdir -p supertrace
 
-TOTAL_WIDTH=256
-TOTAL_HEIGHT=256
+TOTAL_WIDTH=64
+TOTAL_HEIGHT=64
 
 TILE_WIDTH=5
 TILE_HEIGHT=1
@@ -36,7 +36,7 @@ if [ $render = "yes" ] ; then
                             -DTILE_WIDTH=$TILE_WIDTH     \
                             -DTILE_HEIGHT=$TILE_HEIGHT   \
                             -DTOTAL_X=$x -DTOTAL_Y=$y    \
-                        main.cc && ./$binname > supertrace/$y/$x.ppm
+                        src/main.cc && ./$binname > supertrace/$y/$x.ppm
                         rm $binname
                 done;
                 pushd supertrace/$y/
