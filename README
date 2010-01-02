@@ -9,7 +9,7 @@ A mostly useless (but funny) C++ Compile Time Ray Tracer.
 
 
 -------------------------------------------------------------------------------
-this document todo's:
+todo's for this document:
 * Proper formatting
 * Expand 'Scene configuration'
 -------------------------------------------------------------------------------
@@ -34,7 +34,7 @@ this document todo's:
 
  0) Prerequisites
  
- If you know you to invoke g++ 4.4 or newer on your box, skip this section.
+ If you know how to invoke g++ 4.4 or newer on your box, skip this section.
  
  Basic C++0x support is required. Make sure you have at least g++ 
  version 4.4 installed:
