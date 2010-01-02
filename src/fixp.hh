@@ -110,7 +110,6 @@ namespace scalar {
         //*********************************************************************
         // some constants
         //*********************************************************************
-        typedef fixp<-(1<<shift)>     cn1, cn1_0;
         typedef fixp<0>               c0;
         typedef fixp<1<<(shift-3)>    c0_125;
         typedef fixp<1<<(shift-2)>    c0_25; 
@@ -136,7 +135,10 @@ namespace scalar {
         typedef add<c80, c10>         c90, c90_0;
         typedef add<c90, c10>         c100, c100_0;
         
+        typedef neg<c1>               cn1, cn1_0;
+        typedef neg<c2>               cn2, cn2_0;
         
+        typedef fixp<1>               epsilon;
 
 
         //*********************************************************************

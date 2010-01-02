@@ -19,7 +19,7 @@
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 #ifndef TOTAL_WIDTH
-  #define TOTAL_WIDTH 16
+  #define TOTAL_WIDTH 8
 #endif
 
 #ifndef TOTAL_HEIGHT
@@ -64,7 +64,10 @@ namespace config {
 #include "vector.hh"
 #include "ray.hh"
 
-#include "objects.hh"
+#include "sphere.hh"
+#include "aa_plane.hh"
+#include "object_list.hh"
+
 #include "lights.hh"
 #include "raytrace.hh"
 
@@ -112,6 +115,16 @@ int main () {
         // TODO test mul
         
         typedef objects::list<
+                objects::aa_plane<
+                        scalar::cn2,
+                        objects::aa_plane_direction::y,
+                        color::rgbf<scalar::c1,scalar::c0,scalar::c0>
+                >,
+                objects::aa_plane<
+                        scalar::c3,
+                        objects::aa_plane_direction::y,
+                        color::rgbf<scalar::c0,scalar::c1,scalar::c0>
+                >,
                 objects::sphere<
                         vector::vector<scalar::from_int<-3>,scalar::c0,scalar::c8>,
                         scalar::c3
@@ -119,12 +132,12 @@ int main () {
                 objects::sphere<
                         vector::vector<scalar::c2,scalar::c0,scalar::c6>,
                         scalar::c1
-                >
+                >                
         > objects;
 
         typedef raytrace::scene<
                 raytrace::whitted_style,
-                raytrace::simple_camera<scalar::c1>,
+                raytrace::simple_camera<scalar::c0_5>,
                 objects,
                 lights::point_light<
                         vector::vector<scalar::c7,scalar::c2,scalar::c4>,
