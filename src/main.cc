@@ -116,13 +116,13 @@ int main () {
         
         typedef objects::list<
                 objects::aa_plane<
-                        scalar::cn2,
-                        objects::aa_plane_direction::y,
+                        scalar::cn10,
+                        objects::aa_plane_direction::x,
                         color::rgbf<scalar::c1,scalar::c0,scalar::c0>
                 >,
                 objects::aa_plane<
-                        scalar::c3,
-                        objects::aa_plane_direction::y,
+                        scalar::c10,
+                        objects::aa_plane_direction::x,
                         color::rgbf<scalar::c0,scalar::c1,scalar::c0>
                 >,
                 objects::sphere<

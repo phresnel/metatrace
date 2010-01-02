@@ -137,6 +137,7 @@ namespace scalar {
         
         typedef neg<c1>               cn1, cn1_0;
         typedef neg<c2>               cn2, cn2_0;
+        typedef neg<c10>              cn10, cn10_0;
         
         typedef fixp<1>               epsilon;
 
