@@ -59,31 +59,7 @@ namespace raytrace {
                         enum {
                                 does_intersect = intersection::does_intersect
                         };
-                        
-                        /*
-                        typedef typename intersection::distance distance;
-                        
-                        enum {
-                                c = to_int<
-                                        scalar::mul<
-                                                frac0<255,1>,
-                                                scalar::max<
-                                                        frac0<0,1>,
-                                                        scalar::min<
-                                                                frac0<1,1>,
-                                                                mul<
-                                                                        frac0<1,4>,
-                                                                        distance
-                                                                >
-                                                        >
-                                                >
-                                        >
-                                >::value
-                        };                        
-                        typedef rgb<c,c,c> distance_color;
-                        typedef vector::normal_to_rgb<typename intersection::normal> normal_color;
-                        */
-                        
+
                         typedef typename lights::template shade<intersection> lit_result;
 
                 public:

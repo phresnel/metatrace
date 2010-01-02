@@ -115,6 +115,7 @@ int main () {
         // TODO test mul
         
         typedef objects::list<
+                // plumbing
                 objects::aa_plane<
                         scalar::cn10,
                         objects::aa_plane_direction::x,
@@ -125,8 +126,25 @@ int main () {
                         objects::aa_plane_direction::x,
                         color::rgbf<scalar::c0,scalar::c1,scalar::c0>
                 >,
+                objects::aa_plane<
+                        scalar::cn2,
+                        objects::aa_plane_direction::y,
+                        color::rgbf<scalar::c1,scalar::c1,scalar::c1>
+                >,
+                objects::aa_plane<
+                        scalar::c8,
+                        objects::aa_plane_direction::y,
+                        color::rgbf<scalar::c1,scalar::c1,scalar::c1>
+                >,
+                objects::aa_plane<
+                        scalar::c10,
+                        objects::aa_plane_direction::z,
+                        color::rgbf<scalar::c1,scalar::c1,scalar::c1>
+                >,
+                
+                // porcelain
                 objects::sphere<
-                        vector::vector<scalar::from_int<-3>,scalar::c0,scalar::c8>,
+                        vector::vector<scalar::from_int<-3>,scalar::c0,scalar::c7>,
                         scalar::c3
                 >,
                 objects::sphere<
@@ -137,11 +155,11 @@ int main () {
 
         typedef raytrace::scene<
                 raytrace::whitted_style,
-                raytrace::simple_camera<scalar::c0_5>,
+                raytrace::simple_camera<scalar::c0_25>,
                 objects,
                 lights::point_light<
                         vector::vector<scalar::c7,scalar::c2,scalar::c4>,
-                        color::rgbf<scalar::c2,scalar::c2,scalar::c2>,
+                        color::rgbf<scalar::c20,scalar::c20,scalar::c20>,
                         objects
                 >
         > scene;

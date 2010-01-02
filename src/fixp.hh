@@ -115,7 +115,8 @@ namespace scalar {
         typedef fixp<1<<(shift-2)>    c0_25; 
         typedef fixp<1<<(shift-1)>    c0_5;
         typedef add <c0_25, c0_5>     c0_75;
-        typedef fixp<1<<shift>        c1, c1_0;        
+        typedef fixp<1<<shift>        c1, c1_0;
+        typedef add<c1, c0_5>         c1_5;
         typedef inc<c1>               c2, c2_0;
         typedef inc<c2>               c3, c3_0;
         typedef inc<c3>               c4, c4_0;
@@ -137,6 +138,13 @@ namespace scalar {
         
         typedef neg<c1>               cn1, cn1_0;
         typedef neg<c2>               cn2, cn2_0;
+        typedef neg<c2>               cn3, cn3_0;
+        typedef neg<c2>               cn4, cn4_0;
+        typedef neg<c5>               cn5, cn5_0;
+        typedef neg<c5>               cn6, cn6_0;
+        typedef neg<c5>               cn7, cn7_0;
+        typedef neg<c5>               cn8, cn8_0;
+        typedef neg<c5>               cn9, cn9_0;
         typedef neg<c10>              cn10, cn10_0;
         
         typedef fixp<1>               epsilon;

@@ -40,7 +40,7 @@ namespace lights {
                                 vector::template add <                
                                         vector::template scale<
                                                 direction,
-                                                scalar::c0_125
+                                                scalar::c0_125 // TODO: should use smaller value
                                         >,
                                         typename intersection::point_of_intersection
                                 >,
@@ -64,7 +64,7 @@ namespace lights {
                                             || // dist>0 (epsilon self intersect)
                                             scalar::template less<
                                                 typename lightRayIntersect::distance,
-                                                scalar::c0_125
+                                                scalar::epsilon//scalar::c0_125
                                             >::value
                                             )
                                         )                                        
@@ -74,10 +74,13 @@ namespace lights {
                         typedef ift<
                                 unobstructed,
                                 scalar::max<
-                                        scalar::c0_125,
-                                        vector::dot<direction, typename intersection::normal>
+                                        scalar::epsilon/*c0_125*/,
+                                        scalar::div<
+                                                vector::dot<direction, typename intersection::normal>,
+                                                scalar::add<vector::length<diff>, scalar::c1>
+                                        >
                                 >,
-                                scalar::c0_125
+                                scalar::c0
                         > intensity;
                         /*typedef ift<
                                 unobstructed,
