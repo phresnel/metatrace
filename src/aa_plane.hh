@@ -185,7 +185,7 @@ namespace objects {
                                 ift<(hit_side>0), scalar::c1, scalar::cn1>
                         > normal;
                         typedef color_ color;
-                        typedef scalar::c1 mirror;
+                        typedef scalar::c0_75 mirror;
                 };
                 
         };

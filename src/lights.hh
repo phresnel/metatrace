@@ -77,7 +77,7 @@ namespace lights {
                                         scalar::epsilon/*c0_125*/,
                                         scalar::div<
                                                 vector::dot<direction, typename intersection::normal>,
-                                                scalar::add<vector::length_sq<diff>, scalar::c1>
+                                                scalar::add<vector::length<diff>, scalar::c1>
                                         >
                                 >,
                                 scalar::c0

@@ -59,7 +59,8 @@ namespace raytrace {
                 typedef typename ::ray::ray<
                         vector::add<
                                 POI, 
-                                vector::scale<reflect_dir, scalar::mul<scalar::epsilon, scalar::c5>>
+                                //vector::scale<reflect_dir, scalar::mul<scalar::epsilon, scalar::c5>>
+                                vector::scale<surface_normal, scalar::mul<scalar::epsilon, scalar::c5>>
                         >, 
                         reflect_dir
                 > reflect_ray;
@@ -73,7 +74,7 @@ namespace raytrace {
                 template <typename, unsigned int> class raytrace,
                 unsigned int depth_max
         > struct whitted_mirror<intersection, ray, raytrace, depth_max, false> {
-                typedef color::rgbf<scalar::c0,scalar::c1,scalar::c1> color;
+                typedef color::rgbf<scalar::c0,scalar::c0,scalar::c0> color;
         };
 
         template <
@@ -152,7 +153,7 @@ namespace raytrace {
                 
                         typedef typename RendererT<
                                 CameraT, ObjectsT, LightsT
-                        >::template raytrace<ray,1> raytrace;
+                        >::template raytrace<ray,5> raytrace;
                 public:                        
                         typedef typename color::rgbf_to_rgb<typename raytrace::color> color;
                         

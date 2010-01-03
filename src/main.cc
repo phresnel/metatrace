@@ -142,14 +142,19 @@ int main () {
                         objects::aa_plane_direction::z,
                         color::rgbf<scalar::c1,scalar::c1,scalar::c1>
                 >,
+                objects::aa_plane<
+                        scalar::cn2,
+                        objects::aa_plane_direction::z,
+                        color::rgbf<scalar::c1,scalar::c1,scalar::c1>
+                >,
                 
                 // porcelain
                 objects::sphere<
-                        vector::vector<scalar::from_int<-3>,scalar::c0,scalar::c7>,
+                        vector::vector<scalar::from_int<-5>,scalar::c4,scalar::c7>,
                         scalar::c3
                 >,
                 objects::sphere<
-                        vector::vector<scalar::c2,scalar::c0,scalar::c6>,
+                        vector::vector<scalar::c1,scalar::c4,scalar::c6>,
                         scalar::c1
                 >                
         > objects;
@@ -159,8 +164,8 @@ int main () {
                 raytrace::simple_camera<scalar::c0_25>,
                 objects,
                 lights::point_light<
-                        vector::vector<scalar::c7,scalar::c2,scalar::c4>,
-                        color::rgbf<scalar::c100,scalar::c100,scalar::c100>,
+                        vector::vector<scalar::c7,scalar::c6,scalar::c4>,
+                        color::rgbf<scalar::c10,scalar::c10,scalar::c10>,
                         objects
                 >
         > scene;
