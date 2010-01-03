@@ -20,6 +20,7 @@
 
 #ifndef TOTAL_WIDTH
   #define TOTAL_WIDTH 8
+  //#define TOTAL_WIDTH 2
 #endif
 
 #ifndef TOTAL_HEIGHT

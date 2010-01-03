@@ -73,4 +73,12 @@ namespace color {
                 scalar::add<typename lhs_::b,  typename rhs_::b>
         >
         {};
+
+        template <typename lhs_, typename rhs_> struct filter_rgbf
+        : rgbf<
+                scalar::mul<typename lhs_::r,  typename rhs_::r>,
+                scalar::mul<typename lhs_::g,  typename rhs_::g>,
+                scalar::mul<typename lhs_::b,  typename rhs_::b>
+        >
+        {};
 }
