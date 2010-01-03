@@ -28,69 +28,51 @@ namespace vector {
                 typedef z_ z;
         };
 
-        template <typename vec> struct length_sq_impl {
-                typedef
-                scalar::add<
-                        scalar::mul<typename vec::x, typename vec::x>,
-                        scalar::mul<typename vec::y, typename vec::y>,
-                        scalar::mul<typename vec::z, typename vec::z>
-                > type;
-        };
+
         template <typename vec> struct length_sq 
-        : length_sq_impl<vec>::type {};
+        : scalar::add<
+                scalar::mul<typename vec::x, typename vec::x>,
+                scalar::mul<typename vec::y, typename vec::y>,
+                scalar::mul<typename vec::z, typename vec::z>
+        > {};
 
 
-        template <typename vec> struct length_impl {
-                typedef scalar::sqrt<
-                        length_sq<vec>
-                > type;
-        };
         template <typename vec> struct length 
-        : length_impl<vec>::type {};
-                
-        
-        template <typename lhs, typename rhs> struct add_impl {
-                typedef vector<
-                        scalar::add<typename lhs::x, typename rhs::x>,
-                        scalar::add<typename lhs::y, typename rhs::y>,
-                        scalar::add<typename lhs::z, typename rhs::z>
-                > type;
-        };
-        template <typename lhs, typename rhs> struct add
-        : add_impl<lhs,rhs>::type {};
-        
-        
-        template <typename lhs, typename rhs> struct sub_impl {
-                typedef vector<
-                        scalar::sub<typename lhs::x, typename rhs::x>,
-                        scalar::sub<typename lhs::y, typename rhs::y>,
-                        scalar::sub<typename lhs::z, typename rhs::z>
-                > type;
-        };
-        template <typename lhs, typename rhs> struct sub
-        : sub_impl<lhs,rhs>::type {};
-        
-        
-        template <typename lhs, typename rhs> struct scale_impl {
-                typedef vector<
-                        scalar::mul<typename lhs::x, rhs>,
-                        scalar::mul<typename lhs::y, rhs>,
-                        scalar::mul<typename lhs::z, rhs>
-                > type;
-        };
-        template <typename lhs, typename rhs> struct scale
-        : scale_impl<lhs,rhs>::type {};
+        : scalar::sqrt<
+                length_sq<vec>
+        > {};
 
+
+        template <typename lhs, typename rhs> struct add
+        : vector<
+                scalar::add<typename lhs::x, typename rhs::x>,
+                scalar::add<typename lhs::y, typename rhs::y>,
+                scalar::add<typename lhs::z, typename rhs::z>
+        > {};
         
-        template <typename lhs, typename rhs> struct dot_impl {
-                typedef scalar::add<
-                        scalar::mul<typename lhs::x, typename rhs::x>,
-                        scalar::mul<typename lhs::y, typename rhs::y>,
-                        scalar::mul<typename lhs::z, typename rhs::z>
-                > type;
-        };
+
+        template <typename lhs, typename rhs> struct sub
+        : vector<
+                scalar::sub<typename lhs::x, typename rhs::x>,
+                scalar::sub<typename lhs::y, typename rhs::y>,
+                scalar::sub<typename lhs::z, typename rhs::z>
+        > {};
+
+
+        template <typename lhs, typename rhs> struct scale
+        : vector<
+                scalar::mul<typename lhs::x, rhs>,
+                scalar::mul<typename lhs::y, rhs>,
+                scalar::mul<typename lhs::z, rhs>
+        > {};
+
+
         template <typename lhs, typename rhs> struct dot
-        : dot_impl<lhs,rhs>::type {};
+        : scalar::add<
+                scalar::mul<typename lhs::x, typename rhs::x>,
+                scalar::mul<typename lhs::y, typename rhs::y>,
+                scalar::mul<typename lhs::z, typename rhs::z>
+        > {};
 
         
         template <typename vec> struct normalize_impl {
@@ -102,6 +84,19 @@ namespace vector {
         };
         template <typename vec> struct normalize
         : normalize_impl<vec>::type{};
+
+
+        template <typename incident, typename normal> struct reflect
+        : sub<
+                incident, 
+                scale<
+                        normal, 
+                        scalar::mul<
+                                dot<incident, normal>, 
+                                scalar::c2
+                        >
+                >
+        > {};
 
 
         template <typename vec> struct normal_to_rgb
