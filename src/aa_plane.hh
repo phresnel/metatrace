@@ -77,6 +77,7 @@ namespace objects {
                                 scalar::c0
                         > normal;
                         typedef color_ color;
+                        typedef scalar::c0 mirror;
                 };
                 
         };
@@ -130,6 +131,7 @@ namespace objects {
                                 scalar::c0
                         > normal;
                         typedef color_ color;
+                        typedef scalar::c0 mirror;
                 };
                 
         };
@@ -183,6 +185,7 @@ namespace objects {
                                 ift<(hit_side>0), scalar::c1, scalar::cn1>
                         > normal;
                         typedef color_ color;
+                        typedef scalar::c1 mirror;
                 };
                 
         };

@@ -43,6 +43,25 @@ namespace raytrace {
         
         
         template <
+                typename intersection,
+                typename ray,
+                bool is_mirror = intersection::does_intersect
+                                && scalar::greater<typename intersection::mirror, scalar::epsilon>::value
+        > struct whitted_mirror {
+                typedef typename ray::direction ray_dir;
+                typedef typename ray::position  ray_pos;
+                typedef typename intersection::normal surface_normal;
+                typedef color::rgbf<scalar::c1,scalar::c0,scalar::c1> color;
+        };
+
+        template <
+                typename intersection,
+                typename ray
+        > struct whitted_mirror<intersection, ray, false> {
+                typedef color::rgbf<scalar::c0,scalar::c1,scalar::c1> color;
+        };
+
+        template <
                 typename CameraT, 
                 typename ObjectsT, 
                 typename LightsT
@@ -60,13 +79,28 @@ namespace raytrace {
                                 does_intersect = intersection::does_intersect
                         };
 
-                        typedef typename lights::template shade<intersection> lit_result;
+                        typedef typename lights::template shade<intersection>::lit_color diffuse_color;
+
+                        typedef typename whitted_mirror<
+                                intersection,
+                                ray
+                        >::color mirror_color;
 
                 public:
                         typedef ift<
                                 intersection::does_intersect,
-                                ::color::rgbf_to_rgb<typename lit_result::lit_color>,
-                                //rgbf_to_rgb<typename intersection::color>,
+                                ::color::rgbf_to_rgb<
+                                        color::add_rgbf<
+                                                color::mul_rgbf<
+                                                        diffuse_color,
+                                                        scalar::sub<scalar::c1,typename intersection::mirror>
+                                                >,
+                                                color::mul_rgbf<
+                                                        mirror_color,
+                                                        typename intersection::mirror
+                                                >
+                                        >
+                                >,
                                 background_color
                         > color;
                 };

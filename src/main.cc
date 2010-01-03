@@ -44,7 +44,7 @@
 
 namespace config {
         enum {
-                scalar_shift = 16,
+                scalar_shift = 20,
                 heron_initial_max_recursion = 500,
                 trace_shadows = 1,
                 
@@ -159,7 +159,7 @@ int main () {
                 objects,
                 lights::point_light<
                         vector::vector<scalar::c7,scalar::c2,scalar::c4>,
-                        color::rgbf<scalar::c20,scalar::c20,scalar::c20>,
+                        color::rgbf<scalar::c100,scalar::c100,scalar::c100>,
                         objects
                 >
         > scene;

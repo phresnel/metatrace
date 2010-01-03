@@ -58,4 +58,19 @@ namespace color {
         template <typename rgbf_> struct rgbf_to_rgb
         : rgbf_to_rgb_impl<rgbf_>::type {};
 
+        template <typename rgbf_, typename factor_> struct mul_rgbf
+        : rgbf<
+                scalar::mul<typename rgbf_::r, factor_>,
+                scalar::mul<typename rgbf_::g, factor_>,
+                scalar::mul<typename rgbf_::b, factor_>
+        >
+        {};
+
+        template <typename lhs_, typename rhs_> struct add_rgbf
+        : rgbf<
+                scalar::add<typename lhs_::r,  typename rhs_::r>,
+                scalar::add<typename lhs_::g,  typename rhs_::g>,
+                scalar::add<typename lhs_::b,  typename rhs_::b>
+        >
+        {};
 }

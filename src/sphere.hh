@@ -137,6 +137,7 @@ namespace objects {
                                 hit_side = zwo::hit_side,
                                 does_intersect = zwo::does_intersect
                         };
+                        typedef scalar::c0 mirror;
                         
                         typedef typename zwo::distance distance;
                 private:
