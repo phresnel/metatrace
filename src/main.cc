@@ -65,6 +65,8 @@ namespace config {
 #include "vector.hh"
 #include "ray.hh"
 
+#include "materials.hh"
+
 #include "sphere.hh"
 #include "aa_plane.hh"
 #include "object_list.hh"
@@ -111,51 +113,74 @@ void ppm (size_t x, size_t y, int r, int g, int b) {
 }
 
 
-int main () {        
-        // TODO test to int / from int with negative numbers
-        // TODO test mul
-        
+int main () {                
         typedef objects::list<
                 // plumbing
                 objects::aa_plane<
                         scalar::cn10,
                         objects::aa_plane_direction::x,
-                        color::rgbf<scalar::c1,scalar::c0,scalar::c0>
+                        material::material<
+                                material::const_reflection<scalar::c0>::type,
+                                material::const_color<color::rgbf<scalar::c1,scalar::c0,scalar::c0>>::type
+                        >::type
                 >,
                 objects::aa_plane<
                         scalar::c10,
                         objects::aa_plane_direction::x,
-                        color::rgbf<scalar::c0,scalar::c1,scalar::c0>
+                        material::material<
+                                material::const_reflection<scalar::c0>::type,
+                                material::const_color<color::rgbf<scalar::c0,scalar::c1,scalar::c0>>::type
+                        >::type
                 >,
                 objects::aa_plane<
                         scalar::cn2,
                         objects::aa_plane_direction::y,
-                        color::rgbf<scalar::c1,scalar::c1,scalar::c1>
+                        material::material<
+                                material::const_reflection<scalar::c0>::type,
+                                material::const_color<color::rgbf<scalar::c1,scalar::c1,scalar::c1>>::type
+                        >::type
                 >,
                 objects::aa_plane<
                         scalar::c8,
                         objects::aa_plane_direction::y,
-                        color::rgbf<scalar::c1,scalar::c1,scalar::c1>
+                        material::material<
+                                material::const_reflection<scalar::c0>::type,
+                                material::const_color<color::rgbf<scalar::c1,scalar::c1,scalar::c1>>::type
+                        >::type
                 >,
                 objects::aa_plane<
                         scalar::c10,
                         objects::aa_plane_direction::z,
-                        color::rgbf<scalar::c1,scalar::c1,scalar::c1>
+                        material::material<
+                                material::const_reflection<scalar::c0_75>::type,
+                                material::const_color<color::rgbf<scalar::c1,scalar::c1,scalar::c1>>::type
+                        >::type
                 >,
                 objects::aa_plane<
                         scalar::cn2,
                         objects::aa_plane_direction::z,
-                        color::rgbf<scalar::c1,scalar::c1,scalar::c1>
+                        material::material<
+                                material::const_reflection<scalar::c0_75>::type,
+                                material::const_color<color::rgbf<scalar::c1,scalar::c1,scalar::c1>>::type
+                        >::type
                 >,
                 
                 // porcelain
                 objects::sphere<
                         vector::vector<scalar::from_int<-5>,scalar::c4,scalar::c7>,
-                        scalar::c3
+                        scalar::c3,
+                        material::material<
+                                material::const_reflection<scalar::c1>::type,
+                                material::normal2rgb_color
+                        >::type
                 >,
                 objects::sphere<
                         vector::vector<scalar::c1,scalar::c4,scalar::c6>,
-                        scalar::c1
+                        scalar::c1,
+                        material::material<
+                                material::const_reflection<scalar::c1>::type,
+                                material::normal2rgb_color
+                        >::type
                 >                
         > objects;
 
@@ -165,7 +190,7 @@ int main () {
                 objects,
                 lights::point_light<
                         vector::vector<scalar::c7,scalar::c6,scalar::c4>,
-                        color::rgbf<scalar::c10,scalar::c10,scalar::c10>,
+                        color::rgbf<scalar::c20,scalar::c20,scalar::c20>,
                         objects
                 >
         > scene;

@@ -89,9 +89,9 @@ namespace lights {
                         > intensity;*/
                 public:
                         typedef ::color::rgbf<
-                                scalar::mul<typename color::r, typename intersection::color::r, intensity>,
-                                scalar::mul<typename color::g, typename intersection::color::g, intensity>,
-                                scalar::mul<typename color::b, typename intersection::color::b, intensity>
+                                scalar::mul<typename color::r, typename intersection::material::color::r, intensity>,
+                                scalar::mul<typename color::g, typename intersection::material::color::g, intensity>,
+                                scalar::mul<typename color::b, typename intersection::material::color::b, intensity>
                         > lit_color;
                 
                         /*typedef tinplate::rgbf<

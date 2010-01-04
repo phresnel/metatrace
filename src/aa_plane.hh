@@ -29,7 +29,7 @@ namespace objects {
         enum aa_plane_direction {
                 x, y, z
         };
-        template <typename distance_, aa_plane_direction direction, typename color> struct aa_plane;
+        template <typename distance_, aa_plane_direction direction, template <typename position, typename normal> class material_> struct aa_plane;
 
 
 
@@ -52,7 +52,8 @@ namespace objects {
                 typedef vector::vector<scalar::c0,scalar::c0,scalar::c0> point_of_intersection;                
         };
 
-        template <typename value_, typename color_> struct aa_plane<value_, aa_plane_direction::x, color_> {
+        template <typename value_, template <typename position, typename normal> class material_>
+        struct aa_plane<value_, aa_plane_direction::x, material_> {
                 typedef value_ value;
                 
                 template <typename ray_> struct intersect {
@@ -76,8 +77,7 @@ namespace objects {
                                 scalar::c0,                                
                                 scalar::c0
                         > normal;
-                        typedef color_ color;
-                        typedef scalar::c0 mirror;
+                        typedef material_<point_of_intersection, normal> material;
                 };
                 
         };
@@ -106,7 +106,8 @@ namespace objects {
                 typedef vector::vector<scalar::c0,scalar::c0,scalar::c0> point_of_intersection;                
         };
 
-        template <typename value_, typename color_> struct aa_plane<value_, aa_plane_direction::y, color_> {
+        template <typename value_, template <typename position, typename normal> class material_>
+        struct aa_plane<value_, aa_plane_direction::y, material_> {
                 typedef value_ value;
                 
                 template <typename ray_> struct intersect {
@@ -130,8 +131,7 @@ namespace objects {
                                 ift<(hit_side>0), scalar::c1, scalar::cn1>,
                                 scalar::c0
                         > normal;
-                        typedef color_ color;
-                        typedef scalar::c0 mirror;
+                        typedef material_<point_of_intersection, normal> material;
                 };
                 
         };
@@ -160,7 +160,8 @@ namespace objects {
                 typedef vector::vector<scalar::c0,scalar::c0,scalar::c0> point_of_intersection;                
         };
 
-        template <typename value_, typename color_> struct aa_plane<value_, aa_plane_direction::z, color_> {
+        template <typename value_, template <typename position, typename normal> class material_>
+        struct aa_plane<value_, aa_plane_direction::z, material_> {
                 typedef value_ value;
                 
                 template <typename ray_> struct intersect {
@@ -184,8 +185,7 @@ namespace objects {
                                 scalar::c0,
                                 ift<(hit_side>0), scalar::c1, scalar::cn1>
                         > normal;
-                        typedef color_ color;
-                        typedef scalar::c0_75 mirror;
+                        typedef material_<point_of_intersection, normal> material;
                 };
                 
         };

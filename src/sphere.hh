@@ -104,7 +104,12 @@ namespace objects {
         };
                         
                         
-        template <typename position_, typename radius_> struct sphere {
+        template <
+                typename position_, 
+                typename radius_, 
+                template <typename position, typename normal> class material_
+        > 
+        struct sphere {
         private:
                 typedef position_ position;
                 typedef radius_ radius;
@@ -136,8 +141,7 @@ namespace objects {
                         enum {
                                 hit_side = zwo::hit_side,
                                 does_intersect = zwo::does_intersect
-                        };
-                        typedef scalar::c0 mirror;
+                        };                        
                         
                         typedef typename zwo::distance distance;
                 private:
@@ -145,8 +149,8 @@ namespace objects {
                         typedef sphere_drittens<intersect, does_intersect> drei;
                 public:        
                         typedef typename drei::point_of_intersection point_of_intersection;
-                        typedef typename drei::normal normal;
-                        typedef vector::normal_to_rgbf<normal> color;
+                        typedef typename drei::normal normal;                        
+                        typedef material_<point_of_intersection, normal> material;
                 };
         };
 }

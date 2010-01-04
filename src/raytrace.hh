@@ -49,7 +49,7 @@ namespace raytrace {
                 unsigned int depth_max,
                 bool is_mirror = (depth_max>0)
                                 && (intersection::does_intersect)
-                                && (scalar::greater<typename intersection::mirror, scalar::epsilon>::value)
+                                && (scalar::greater<typename intersection::material::reflection, scalar::epsilon>::value)
         > class whitted_mirror {
                 typedef typename ray::direction                           ray_dir;
                 typedef typename ray::position                            ray_pos;
@@ -98,8 +98,6 @@ namespace raytrace {
                         };
 
                         typedef typename lights::template shade<intersection>::lit_color diffuse_color;
-                public:
-                        typedef void booo;
                 private:
                         typedef typename whitted_mirror<
                                 intersection,
@@ -108,20 +106,21 @@ namespace raytrace {
                                 depth_max
                         >::color mirror_color;
 
+                        typedef typename intersection::material::reflection reflection;
                 public:
                         typedef ift<
                                 intersection::does_intersect,
                                 color::add_rgbf<
                                         color::mul_rgbf<
                                                 diffuse_color,
-                                                scalar::sub<scalar::c1,typename intersection::mirror>
+                                                scalar::sub<scalar::c1,reflection>
                                         >,
                                         color::mul_rgbf<
                                                 color::filter_rgbf<
                                                         diffuse_color,                
                                                         mirror_color
                                                 >,
-                                                typename intersection::mirror
+                                                reflection
                                         >
                                 >,
                                 background_color
@@ -153,7 +152,7 @@ namespace raytrace {
                 
                         typedef typename RendererT<
                                 CameraT, ObjectsT, LightsT
-                        >::template raytrace<ray,5> raytrace;
+                        >::template raytrace<ray,15> raytrace;
                 public:                        
                         typedef typename color::rgbf_to_rgb<typename raytrace::color> color;
                         
