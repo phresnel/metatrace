@@ -19,10 +19,11 @@
 # along with this program.  If not, see <http:#www.gnu.org/licenses/>.
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-mkdir -p supertrace
+TARGET_DIR=alphacentauri
+mkdir -p $TARGET_DIR
 
-TOTAL_WIDTH=32
-TOTAL_HEIGHT=32
+TOTAL_WIDTH=4
+TOTAL_HEIGHT=4
 
 TILE_WIDTH=5
 TILE_HEIGHT=1
@@ -47,7 +48,7 @@ fi;
 if [ $render = "yes" ] ; then
         for ((y=$y_start; y<TOTAL_HEIGHT; y+=((TILE_HEIGHT*$n_th)) )); do
                 for ((x=0; x<TOTAL_WIDTH; x+=TILE_WIDTH)); do
-                        mkdir -p supertrace/$y/
+                        mkdir -p $TARGET_DIR/$y/
                         binname=$x.$y.out
                         g++-4.4 -o $binname -std=c++0x -ftemplate-depth-10000  \
                             -DTOTAL_WIDTH=$TOTAL_WIDTH   \
@@ -55,17 +56,18 @@ if [ $render = "yes" ] ; then
                             -DTILE_WIDTH=$TILE_WIDTH     \
                             -DTILE_HEIGHT=$TILE_HEIGHT   \
                             -DTOTAL_X=$x -DTOTAL_Y=$y    \
-                        src/main.cc && ./$binname > supertrace/$y/$x.ppm
+                        src/main.cc && ./$binname > $TARGET_DIR/$y/$x.ppm
                         rm $binname
                 done;
-                pushd supertrace/$y/
+                pushd $TARGET_DIR/$y/
                 convert +append $(ls *.ppm | sort -n) ../$y.ppm
                 popd
         done;
+        echo "" > $TARGET_DIR/$2.done ;
 fi;
 if [ $do_join = "yes" ] ; then
         echo "joining..."
-        pushd supertrace
+        pushd $TARGET_DIR
         convert -append $(ls *.ppm | sort -n) final.ppm
         popd
 fi;
