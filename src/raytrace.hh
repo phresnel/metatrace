@@ -60,7 +60,7 @@ namespace raytrace {
                         vector::add<
                                 POI, 
                                 //vector::scale<reflect_dir, scalar::mul<scalar::epsilon, scalar::c5>>
-                                vector::scale<surface_normal, scalar::mul<scalar::epsilon, scalar::c5>>
+                                vector::scale<surface_normal, scalar::reflection_offset_epsilon>
                         >, 
                         reflect_dir
                 > reflect_ray;
@@ -107,6 +107,7 @@ namespace raytrace {
                         >::color mirror_color;
 
                         typedef typename intersection::material::reflection reflection;
+                        typedef typename intersection::material::color      surface_color;
                 public:
                         typedef ift<
                                 intersection::does_intersect,
@@ -117,7 +118,7 @@ namespace raytrace {
                                         >,
                                         color::mul_rgbf<
                                                 color::filter_rgbf<
-                                                        diffuse_color,                
+                                                        surface_color,
                                                         mirror_color
                                                 >,
                                                 reflection

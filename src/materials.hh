@@ -34,6 +34,8 @@ namespace material {
                 struct type : reflection_ {};
         };
         
+        // TODO: implement checkered board color
+        
         template <
                 template <typename pos, typename dir> class reflection_,
                 template <typename pos, typename dir> class color_

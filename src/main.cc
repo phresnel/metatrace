@@ -170,16 +170,16 @@ int main () {
                         vector::vector<scalar::from_int<-5>,scalar::c4,scalar::c7>,
                         scalar::c3,
                         material::material<
-                                material::const_reflection<scalar::c1>::type,
-                                material::normal2rgb_color
+                                material::const_reflection<scalar::c0_75>::type,
+                                material::const_color<color::rgbf<scalar::c1,scalar::c0_75,scalar::c0_75>>::type//material::normal2rgb_color
                         >::type
                 >,
                 objects::sphere<
                         vector::vector<scalar::c1,scalar::c4,scalar::c6>,
                         scalar::c1,
                         material::material<
-                                material::const_reflection<scalar::c1>::type,
-                                material::normal2rgb_color
+                                material::const_reflection<scalar::c0_75>::type,
+                                material::const_color<color::rgbf<scalar::c0_75,scalar::c0_75,scalar::c1>>::type//material::normal2rgb_color
                         >::type
                 >                
         > objects;
@@ -190,7 +190,7 @@ int main () {
                 objects,
                 lights::point_light<
                         vector::vector<scalar::c7,scalar::c6,scalar::c4>,
-                        color::rgbf<scalar::c20,scalar::c20,scalar::c20>,
+                        color::rgbf<scalar::c10,scalar::c10,scalar::c10>,
                         objects
                 >
         > scene;

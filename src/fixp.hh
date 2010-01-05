@@ -148,6 +148,7 @@ namespace scalar {
         typedef neg<c10>              cn10, cn10_0;
         
         typedef fixp<1>               epsilon;
+        typedef fixp<30>              reflection_offset_epsilon; // TODO: needs serious research
 
 
         //*********************************************************************
