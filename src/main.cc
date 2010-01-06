@@ -175,7 +175,7 @@ int main () {
                         >::type
                 >,
                 objects::sphere<
-                        vector::vector<scalar::c1,scalar::c4,scalar::c6>,
+                        vector::vector<scalar::c1_25,scalar::c4,scalar::c6>,
                         scalar::c1,
                         material::material<
                                 material::const_reflection<scalar::c0_75>::type,

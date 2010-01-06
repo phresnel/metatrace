@@ -116,6 +116,7 @@ namespace scalar {
         typedef fixp<1<<(shift-1)>    c0_5;
         typedef add <c0_25, c0_5>     c0_75;
         typedef fixp<1<<shift>        c1, c1_0;
+        typedef add<c1, c0_25>        c1_25;
         typedef add<c1, c0_5>         c1_5;
         typedef inc<c1>               c2, c2_0;
         typedef inc<c2>               c3, c3_0;
@@ -148,7 +149,7 @@ namespace scalar {
         typedef neg<c10>              cn10, cn10_0;
         
         typedef fixp<1>               epsilon;
-        typedef fixp<30>              reflection_offset_epsilon; // TODO: needs serious research
+        typedef fixp<0xFFF>           reflection_offset_epsilon; // TODO: needs serious research
 
 
         //*********************************************************************
