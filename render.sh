@@ -19,11 +19,11 @@
 # along with this program.  If not, see <http:#www.gnu.org/licenses/>.
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-TARGET_DIR=alphacentauri
+TARGET_DIR=supertrace
 mkdir -p $TARGET_DIR
 
-TOTAL_WIDTH=4
-TOTAL_HEIGHT=4
+TOTAL_WIDTH=512
+TOTAL_HEIGHT=512
 
 TILE_WIDTH=5
 TILE_HEIGHT=1

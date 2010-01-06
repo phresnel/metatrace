@@ -26,10 +26,10 @@ for ((t=0; t<NUM_THREADS; ++t)); do
 done;
 # sync
 for ((t=0; t<NUM_THREADS; ++t)); do
-        while [ ! -e alphacentauri/$t.done ] ; do 
+        while [ ! -e supertrace/$t.done ] ; do 
                 sleep 3
         done;
-        echo "synced " $t " of " NUM_THREADS
+        echo "synced " $t " of " $NUM_THREADS
 done;
 
 ./render.sh join
