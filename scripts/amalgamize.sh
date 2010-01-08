@@ -1,7 +1,8 @@
 #!/bin/bash
 SRC=../src
+cat $SRC/copyright-header > amalgam.cc
+echo -e "#define AMALGAM\n" >> amalgam.cc
 cat \
-        $SRC/copyright-header \
         $SRC/"base-config.hh" \
         $SRC/"control-flow.hh" \
         $SRC/"fixp.hh" \
@@ -14,6 +15,5 @@ cat \
         $SRC/"object_list.hh" \
         $SRC/"lights.hh" \
         $SRC/"raytrace.hh" \
-        > amalgam.cc
-
-
+        $SRC/"main.cc" \
+        >> amalgam.cc
