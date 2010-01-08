@@ -1,7 +1,9 @@
 #!/bin/bash
 SRC=../src
-cat $SRC/copyright-header > amalgam.cc
-echo -e "#define AMALGAM\n" >> amalgam.cc
+BUILD=../build
+mkdir -p $BUILD
+cat $SRC/copyright-header > $BUILD/amalgam.cc
+echo -e "#define AMALGAM\n" >> $BUILD/amalgam.cc
 cat \
         $SRC/"base-config.hh" \
         $SRC/"control-flow.hh" \
@@ -16,4 +18,4 @@ cat \
         $SRC/"lights.hh" \
         $SRC/"raytrace.hh" \
         $SRC/"main.cc" \
-        >> amalgam.cc
+        >> $BUILD/amalgam.cc
