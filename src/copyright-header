@@ -1,4 +1,3 @@
-#ifndef AMALGAM
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Copyright (C) 2009  Sebastian Mach (*1983)
 // * mail: phresnel/at/gmail/dot/com
@@ -18,26 +17,3 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#endif
-
-//=======================================================================================
-// ray
-//=======================================================================================
-namespace ray {
-        template <typename position_, typename direction_> struct ray {
-                typedef position_ position;
-                typedef direction_ direction;
-        };
-        
-        template <typename ray, typename factor> struct madd_impl {
-                typedef vector::add<
-                        typename ray::position,
-                        vector::scale<
-                                typename ray::direction,
-                                factor
-                        >
-                > type;
-        };
-        template <typename ray, typename factor> struct madd
-        : madd_impl<ray,factor>::type{};        
-}

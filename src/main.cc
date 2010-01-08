@@ -1,3 +1,4 @@
+#ifndef AMALGAM
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Copyright (C) 2009  Sebastian Mach (*1983)
 // * mail: phresnel/at/gmail/dot/com
@@ -17,48 +18,12 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-#ifndef TOTAL_WIDTH
-  #define TOTAL_WIDTH 8
-  //#define TOTAL_WIDTH 2
 #endif
 
-#ifndef TOTAL_HEIGHT
-  #define TOTAL_HEIGHT TOTAL_WIDTH
-#endif
 
-#ifndef TILE_WIDTH
-  #define TILE_WIDTH TOTAL_WIDTH
-#endif
 
-#ifndef TILE_HEIGHT
-  #define TILE_HEIGHT TOTAL_HEIGHT
-#endif
-
-#ifndef TOTAL_X
-  #define TOTAL_X 0
-#endif
-
-#ifndef TOTAL_Y
-  #define TOTAL_Y 0
-#endif
-
-namespace config {
-        enum {
-                scalar_shift = 20,
-                heron_initial_max_recursion = 500,
-                trace_shadows = 1,
-                
-                screen_width = TILE_WIDTH,
-                screen_height = TILE_HEIGHT,
-                
-                virtual_x = TOTAL_X,
-                virtual_y = TOTAL_Y,
-                virtual_width = TOTAL_WIDTH,
-                virtual_height = TOTAL_HEIGHT,
-        };
-};
-
+#ifndef AMALGAM
+#include "base-config.hh"
 #include "control-flow.hh"
 #include "fixp.hh"
 #include "rgb.hh"
@@ -73,11 +38,7 @@ namespace config {
 
 #include "lights.hh"
 #include "raytrace.hh"
-
-
-namespace scene {
-        
-};
+#endif
 
 
 #include <iostream>

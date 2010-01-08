@@ -18,32 +18,45 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#endif 
+
+#ifndef TOTAL_WIDTH
+  //#define TOTAL_WIDTH 8
+  #define TOTAL_WIDTH 2
 #endif
-namespace material {
-        
-        
-        template <typename color_> struct const_color {
-                template <typename position, typename normal>
-                struct type : color_ {};
+
+#ifndef TOTAL_HEIGHT
+  #define TOTAL_HEIGHT TOTAL_WIDTH
+#endif
+
+#ifndef TILE_WIDTH
+  #define TILE_WIDTH TOTAL_WIDTH
+#endif
+
+#ifndef TILE_HEIGHT
+  #define TILE_HEIGHT TOTAL_HEIGHT
+#endif
+
+#ifndef TOTAL_X
+  #define TOTAL_X 0
+#endif
+
+#ifndef TOTAL_Y
+  #define TOTAL_Y 0
+#endif
+
+namespace config {
+        enum {
+                scalar_shift = 20,
+                heron_initial_max_recursion = 500,
+                trace_shadows = 1,
+                
+                screen_width = TILE_WIDTH,
+                screen_height = TILE_HEIGHT,
+                
+                virtual_x = TOTAL_X,
+                virtual_y = TOTAL_Y,
+                virtual_width = TOTAL_WIDTH,
+                virtual_height = TOTAL_HEIGHT,
         };
-        
-        template <typename position, typename normal>
-        struct normal2rgb_color : vector::normal_to_rgbf<normal> {};
-        
-        template <typename reflection_> struct const_reflection {
-                template <typename position, typename normal>
-                struct type : reflection_ {};
-        };
-        
-        // TODO: implement checkered board color
-        
-        template <
-                template <typename pos, typename dir> class reflection_,
-                template <typename pos, typename dir> class color_
-        > struct material {
-                template <typename position, typename normal> struct type {
-                        typedef reflection_<position, normal> reflection;
-                        typedef color_<position, normal>      color;
-                };
-        };
-}
+};
