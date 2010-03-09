@@ -93,14 +93,14 @@ todo's for this document:
  Assume you want to have 4 compile threads (e.g. because you have a quad core),
  then type:
  
-   $ ./stupid-and-blind-multicore.sh multi 1 4 &
-   $ ./stupid-and-blind-multicore.sh multi 2 4 &
-   $ ./stupid-and-blind-multicore.sh multi 3 4 &
-   $ ./stupid-and-blind-multicore.sh multi 4 4 &
+   $ ./render.sh multi 1 4 &
+   $ ./render.sh multi 2 4 &
+   $ ./render.sh multi 3 4 &
+   $ ./render.sh multi 4 4 &
    
  If all compiling is done,
  
-   $ ./stupid-and-blind-multicore.sh join
+   $ ./render.sh join
    
  You'll reap "supertrace/final.ppm".
  
@@ -109,7 +109,7 @@ todo's for this document:
  Configuring image resolution
 -------------------------------------------------------------------------------
 
- If you use ./stupid-and-blind-multicore.sh , open it in your editor, and see
+ If you use ./render.sh , open it in your editor, and see
  the following fields:
 
   TOTAL_WIDTH=1024
