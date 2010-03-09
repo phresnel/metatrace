@@ -22,16 +22,20 @@
 TARGET_DIR=supertrace
 mkdir -p $TARGET_DIR
 
-TOTAL_WIDTH=512
-TOTAL_HEIGHT=512
+TOTAL_WIDTH=32
+TOTAL_HEIGHT=32
+
+GCC=/usr/local/gcc-4.5-20100306/bin/g++
+echo "using $GCC"
+echo "version: '"$($GCC --version)"'"
 
 TILE_WIDTH=5
 TILE_HEIGHT=1
 
-if [ ${1} = "join" ] ; then
+if [ "${1}" = "join" ] ; then
         do_join="yes"
         render="no"
-elif [ $1 = "multi" ] ; then 
+elif [ "$1" = "multi" ] ; then
         do_join="no"
         render="yes"
         y_start=$2
@@ -50,7 +54,8 @@ if [ $render = "yes" ] ; then
                 for ((x=0; x<TOTAL_WIDTH; x+=TILE_WIDTH)); do
                         mkdir -p $TARGET_DIR/$y/
                         binname=$x.$y.out
-                        g++-4.4 -o $binname -std=c++0x -ftemplate-depth-10000  \
+                        $GCC  \
+                            -o $binname -std=c++0x -ftemplate-depth-10000  \
                             -DTOTAL_WIDTH=$TOTAL_WIDTH   \
                             -DTOTAL_HEIGHT=$TOTAL_HEIGHT \
                             -DTILE_WIDTH=$TILE_WIDTH     \
