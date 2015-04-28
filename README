@@ -1,9 +1,63 @@
+[`ORIGINAL GITORIOUS PROJECT META`](https://gitorious.org/metatrace)
+
+# Metatrace
+
+Metatrace is a C++ compile time ray tracer ^0 (as of the initial release, it is a whitted style one).
+
+It is mostly inane stuff. except, maybe, that it's a nice gadget to test compiler performance and conformance, especially but not exclusively in the Template and Metaprogramming corner of C++.
+
+It requires basic C++0x support; with g++, make sure to have at least 4.4 installed.
+
+----------
+
+## Extern
+* [Announcement](http://ompf.org/forum/viewtopic.php?p=16900)
+* [git origin](http://savannah.nongnu.org/projects/metatrace)
+* [download release packages](http://code.google.com/p/metatrace/downloads/list)
+
+-----------
+
+## Features
+
+### graphics viewpoint:
+* linear object list
+* recursive ray tracing (whitted style)
+* mirror reflections
+* spheres, axis aligned planes
+* quite easily extensible (considering the circumstances)
+* rgb colors
+* scalar type is fixed point
+* not fast
+
+### c++ viewpoint:
+* uses variadic templates in some contexts (e.g. scene, some math-operations)
+* fairly heavy compile time number crunching (brings back the "slow" in "ray tracing")
+* strongly typed enums, to avoid ugly enum hacks like "FORCE_DWORD=0xEFFFFFFF" and the like
+
+### bash viewpoint:
+* contains a bash script to compile on multiple cores
+
+_... more to come._
+
+--------------
+
+## Example Rendering
+
+![an example rendering](http://metatrace.googlecode.com/files/example-0.png)
+
+---------------
+
+_^0: For the googles, it is also a c++ compile time raytracer and a c++ meta ray tracer (and unsurprisingly, it is even a c++ meta raytracer (and surely, a c++ template ray tracer)) :D_
+
+----------------
+
+
+`ORIGINAL README`
 
 
   metatrace
 
 A mostly useless (but funny) C++ Compile Time Ray Tracer.
-
 
 
 
