@@ -43,7 +43,7 @@ _... more to come._
 
 ## Example Rendering
 
-![an example rendering](http://metatrace.googlecode.com/files/example-0.png)
+![an example rendering](https://i.stack.imgur.com/lX8c8.png)
 
 ---------------
 
